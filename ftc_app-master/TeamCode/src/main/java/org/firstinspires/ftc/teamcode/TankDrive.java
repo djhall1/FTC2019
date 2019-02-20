@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -72,7 +70,7 @@ public class TankDrive extends OpMode {
                 robot.frontLeftDrive.setPower(leftPower);
                 robot.frontRightDrive.setPower(rightPower);
             }
-            if (gamepad2.x){
+            if (xPressed){
                 leftPower = Range.clip(-gamepad1.left_stick_y, -0.75, 0.75);
                 rightPower = Range.clip(-gamepad1.right_stick_y, -0.75, 0.75);
 
@@ -81,7 +79,7 @@ public class TankDrive extends OpMode {
                 robot.frontLeftDrive.setPower(leftPower);
                 robot.frontRightDrive.setPower(rightPower);
         }
-        if (gamepad2.b){
+        if (bPressed){
             leftPower = Range.clip(-gamepad1.left_stick_y, -0.5, 0.5);
             rightPower = Range.clip(-gamepad1.right_stick_y, -0.5, 0.5);
 
@@ -90,7 +88,7 @@ public class TankDrive extends OpMode {
             robot.rightDrive.setPower(rightPower);
             robot.frontRightDrive.setPower(rightPower);
         }
-        if(gamepad2.a){
+        if(aPressed){
             leftPower = Range.clip(-gamepad1.left_stick_y, -0.25, 0.25);
             rightPower = Range.clip(-gamepad1.right_stick_y, -0.25, 0.25);
 
@@ -137,4 +135,4 @@ public class TankDrive extends OpMode {
 
     }
 
->>>>>>> parent of a3b9109... Set adjustable speeds based on controller 2
+
