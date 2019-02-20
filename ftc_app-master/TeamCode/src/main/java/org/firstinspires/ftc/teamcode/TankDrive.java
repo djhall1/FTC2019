@@ -70,7 +70,7 @@ public class TankDrive extends OpMode {
                 robot.frontLeftDrive.setPower(leftPower);
                 robot.frontRightDrive.setPower(rightPower);
             }
-            if (gamepad2.x){
+            else if (xPressed){
                 leftPower = Range.clip(-gamepad1.left_stick_y, -0.75, 0.75);
                 rightPower = Range.clip(-gamepad1.right_stick_y, -0.75, 0.75);
 
@@ -79,7 +79,7 @@ public class TankDrive extends OpMode {
                 robot.frontLeftDrive.setPower(leftPower);
                 robot.frontRightDrive.setPower(rightPower);
         }
-        if (gamepad2.b){
+        else if (bPressed){
             leftPower = Range.clip(-gamepad1.left_stick_y, -0.5, 0.5);
             rightPower = Range.clip(-gamepad1.right_stick_y, -0.5, 0.5);
 
@@ -88,9 +88,18 @@ public class TankDrive extends OpMode {
             robot.rightDrive.setPower(rightPower);
             robot.frontRightDrive.setPower(rightPower);
         }
-        if(gamepad2.a){
+        else if(aPressed){
             leftPower = Range.clip(-gamepad1.left_stick_y, -0.25, 0.25);
             rightPower = Range.clip(-gamepad1.right_stick_y, -0.25, 0.25);
+
+            robot.frontRightDrive.setPower(rightPower);
+            robot.rightDrive.setPower(rightPower);
+            robot.frontLeftDrive.setPower(leftPower);
+            robot.leftDrive.setPower(leftPower);
+        }
+        else{
+            leftPower = Range.clip(-gamepad1.left_stick_y, -1.0, 1.0);
+            rightPower = Range.clip(-gamepad1.right_stick_y, -1.0, 1.0);
 
             robot.frontRightDrive.setPower(rightPower);
             robot.rightDrive.setPower(rightPower);
