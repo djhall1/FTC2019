@@ -15,7 +15,6 @@ public class hardwareMap {
     public DcMotor hand = null;
     public DcMotor hook = null;
     public Servo claw = null;
-    public Servo token = null;
 
     public static final double midServo =  0.5 ;
 
@@ -36,7 +35,6 @@ public class hardwareMap {
         hand = hwMap.get(DcMotor.class, "hand");
         hook = hwMap.get(DcMotor.class, "hook");
         claw = hwMap.get(Servo.class, "claw");
-        token = hwMap.get(Servo.class, "token");
 
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -50,7 +48,6 @@ public class hardwareMap {
         hook.setPower(0);
         frontLeftDrive.setPower(0);
         frontRightDrive.setPower(0);
-        token.setPosition(0);
 
     }
 
