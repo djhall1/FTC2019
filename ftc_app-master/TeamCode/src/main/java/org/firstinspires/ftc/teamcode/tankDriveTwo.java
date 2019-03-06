@@ -13,18 +13,13 @@ public class tankDriveTwo extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
     hardwareMap robot = new hardwareMap();
 
-    boolean yPressed, xPressed, bPressed, aPressed;
+    float powerMod;
 
     @Override
     public void init() {
         robot.init(hardwareMap);
 
-        // set initial button press values
-        // TODO: Make seperate controller class with function for button presses.
-        yPressed = false;
-        xPressed = false;
-        bPressed = false;
-        aPressed = false;
+        powerMod = 1.0;
 
         runtime.reset();
     }
@@ -37,55 +32,10 @@ public class tankDriveTwo extends OpMode {
         double armPowerCounterClockwise;
         double armPower;
 
-
-
-        // check to see if gamepad button pressed
-        if (gamepad2.y){
-            yPressed = true;
-            xPressed = false;
-            bPressed = false;
-            aPressed = false;
-        }
-        else if (gamepad2.x){
-            yPressed = false;
-            xPressed = true;
-            bPressed = false;
-            aPressed = false;
-        }
-        else if (gamepad2.a){
-            yPressed = false;
-            xPressed = false;
-            bPressed = false;
-            aPressed = true;
-        }
-        else if (gamepad2.b){
-            yPressed = false;
-            xPressed = false;
-            bPressed = true;
-            aPressed = false;
-        }
-        leftPower = Range.clip(-gamepad1.left_stick_y, -1.0, 1.0);
-        rightPower = Range.clip(-gamepad1.right_stick_y, -1.0, 1.0);
-
-        if (yPressed){
-            leftPower = leftPower * 2;
-            rightPower = rightPower * 2;
-        }
-        if (xPressed){
-            leftPower = leftPower / 2;
-            rightPower = rightPower / 2;
-        }
-        if (bPressed){
-            leftPower = leftPower / 3;
-            rightPower = rightPower / 3;
-        }
-        if(aPressed){
-            leftPower = leftPower * 3;
-            rightPower = rightPower * 3;
-
-        }
-
-        robot.tankDrive(leftPower,rightPower);
+        // Check gamepad face buttons and modify power outputs based on it.
+        this.buttonPress(gamepad1.Y,gamepad1.X,gamepad1.A,gamepad1.B)
+        // Tank Drive
+        robot.tankDrive(leftPower,rightPower, powerMod);
 
         armPowerClockWise = Range.clip(gamepad1.left_trigger,0.0, 1.0);
         armPowerCounterClockwise = Range.clip(gamepad1.right_trigger, 0.0, 1.0);
@@ -103,12 +53,10 @@ public class tankDriveTwo extends OpMode {
         }
 
         if (gamepad1.dpad_up) {
-            robot.hook.setPower(1.0);
+            robot.extend();
         }
         else if (gamepad1.dpad_down) {
-            robot.hook.setPower(-1.0);
-        } else {
-            robot.hook.setPower(0);
+            robot.retract();
         }
 
         if(gamepad1.x){
@@ -119,8 +67,16 @@ public class tankDriveTwo extends OpMode {
         }
     }
 
-    public void buttonPress (boolean gamepad Y, boolean gamepadX, boolean gamepadA, boolean gamepadB){
-
+    public void buttonPress (boolean Y, boolean X, boolean A, boolean B){
+        if Y {
+            this.powerMod = 4.0;
+        } else if X{
+            this.powerMod = 2.0;
+        } else if A {
+            this.powerMod = 3.0;
+        } else if B {
+            this.powerMod = 1.0;
+        }
     }
 
 

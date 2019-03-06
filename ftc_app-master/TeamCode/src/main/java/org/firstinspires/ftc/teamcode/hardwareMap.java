@@ -83,11 +83,11 @@ public class hardwareMap {
         }
     }
 
-    public void tankDrive(double leftPower, double rightPower){
-        this.frontRightDrive.setPower(rightPower);
-        this.rightDrive.setPower(rightPower);
-        this.frontLeftDrive.setPower(leftPower);
-        this.leftDrive.setPower(leftPower);
+    public void tankDrive(double leftPower, double rightPower, double mod){
+        this.frontRightDrive.setPower(rightPower / mod);
+        this.rightDrive.setPower(rightPower / mod);
+        this.frontLeftDrive.setPower(leftPower /  mod);
+        this.leftDrive.setPower(leftPower / mod);
     }
 
 }
