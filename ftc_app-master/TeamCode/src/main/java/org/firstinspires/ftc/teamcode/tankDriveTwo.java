@@ -13,14 +13,18 @@ public class tankDriveTwo extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
     hardwareMap robot = new hardwareMap();
 
-    boolean yPressed = false;
-    boolean xPressed = false;
-    boolean bPressed = false;
-    boolean aPressed = false;
+    boolean yPressed, xPressed, bPressed, aPressed;
 
     @Override
     public void init() {
         robot.init(hardwareMap);
+
+        // set initial button press values
+        // TODO: Make seperate controller class with function for button presses.
+        yPressed = false;
+        xPressed = false;
+        bPressed = false;
+        aPressed = false;
 
         runtime.reset();
     }
@@ -80,10 +84,8 @@ public class tankDriveTwo extends OpMode {
             rightPower = rightPower * 3;
 
         }
-        robot.leftDrive.setPower(leftPower);
-        robot.rightDrive.setPower(rightPower);
-        robot.frontLeftDrive.setPower(leftPower);
-        robot.frontRightDrive.setPower(rightPower);
+
+        robot.tankDrive(leftPower,rightPower);
 
         armPowerClockWise = Range.clip(gamepad1.left_trigger,0.0, 1.0);
         armPowerCounterClockwise = Range.clip(gamepad1.right_trigger, 0.0, 1.0);
@@ -115,6 +117,10 @@ public class tankDriveTwo extends OpMode {
         else if(gamepad1.b){
             robot.claw.setPosition(0);
         }
+    }
+
+    public void buttonPress (boolean gamepad Y, boolean gamepadX, boolean gamepadA, boolean gamepadB){
+
     }
 
 
